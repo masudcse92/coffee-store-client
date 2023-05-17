@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 
 const AddCoffe = () => {
 
@@ -15,6 +16,19 @@ const AddCoffe = () => {
 
         const newCoffee = {name, quantity, supplier, taste, category, details, photo};
         console.log(newCoffee);
+
+        // Send data to the seever
+        fetch('http://localhost:5000/coffee', {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
     }
 
     return (
