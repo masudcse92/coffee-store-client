@@ -8,19 +8,29 @@ import {
 import "./index.css";
 import AddCoffe from './components/AddCoffe.jsx';
 import UpdateCoffe from './components/UpdateCoffe.jsx';
+import ViewCoffe from './components/ViewCoffe.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>
+    element: <App></App>,
+    loader: () => fetch('http://localhost:5000/coffee')
   },
   {
     path: '/addCoffee',
     element: <AddCoffe></AddCoffe>
   },
   {
-    path: '/updateCoffee',
-    element: <UpdateCoffe></UpdateCoffe>
+    path: 'updateCoffee/:id',
+    element: <UpdateCoffe></UpdateCoffe>,
+    loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
+
+  },
+  {
+    path: 'viewCoffee/:id',
+    element: <ViewCoffe></ViewCoffe>,
+    loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
+
   }
 
 ]);
